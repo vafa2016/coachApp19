@@ -125,14 +125,6 @@ export class MatchcenterPage {
     }
   }
 
-  isReady(val){
-    console.log(val);
-    if(val == true){
-      this.cmnfun.HideLoading();
-    }
-    return true;
-  }
-
 
   // path reset function
   cutPath(url){
@@ -268,7 +260,7 @@ export class MatchcenterPage {
           // if(this.roundScores.length > 0){
             this.cmnfun.HideLoading();
           // }
-         
+
       }
   };
 
