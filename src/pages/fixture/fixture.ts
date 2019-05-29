@@ -9,7 +9,7 @@ import { ReversePipe } from '../../pipes/reverse/reverse';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { PopoverController } from 'ionic-angular';
 import {YeardropdownPage} from '../yeardropdown/yeardropdown';
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 /**
  * Generated class for the FixturePage page.
  *
@@ -59,6 +59,8 @@ export class FixturePage {
 
   YearList: any = [];
   selectd_yr: any = '';
+  safeURL : any;
+  weblink:boolean = false;
 
   constructor(private zone: NgZone,
     public plt:Platform,
@@ -66,6 +68,7 @@ export class FixturePage {
     public popoverCtrl: PopoverController,
     private inapp: InAppBrowser,
     public ajax: AjaxProvider,
+    private sanitizer: DomSanitizer,
     private modalCtrl: ModalController,
     public events: Events,
     public cmnfun: CommomfunctionProvider,
@@ -417,6 +420,7 @@ export class FixturePage {
       // this.cmnfun.showToast('Some thing Unexpected happen please try again');
     })
   }
+
   selectedFixtureType(type) {
     if (type == 'Round') {
       this.roundNo = '0_0';
@@ -491,6 +495,12 @@ export class FixturePage {
     modal.onDidDismiss(data => {
       if(data){
       console.log(data);
+      if(data.seasons[0].manual_score_recording == "2"){
+        this.selectables = data.competitions_name;
+        this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_fixture);
+        this.weblink = true;
+      }else {
+        this.weblink = false;
       this.YearList = data.seasons;
       this.selectd_yr = this.YearList[0].competition_year;
       this.selectables = data.competitions_name
@@ -521,6 +531,7 @@ export class FixturePage {
           // this.cmnfun.showToast('Some thing Unexpected happen please try again');
         })
       }
+    }
     }
     });
     modal.present();

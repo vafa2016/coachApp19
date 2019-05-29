@@ -4,6 +4,7 @@ import { AjaxProvider } from '../../providers/ajax/ajax';
 import { CommomfunctionProvider } from '../../providers/commomfunction/commomfunction';
 import { Events,Platform } from 'ionic-angular';
 import { KeysPipe } from '../../pipes/keys/keys';
+import { SafePipe } from '../../pipes/safe/safe';
 import { ReversePipe } from '../../pipes/reverse/reverse';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
@@ -13,6 +14,8 @@ import { PopoverController } from 'ionic-angular';
 import {YeardropdownPage} from '../yeardropdown/yeardropdown';
 import { ProductListProvider } from '../../providers/product-list/product-list';
 import { LocalDataProvider } from './../../providers/local-data/local-data';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 /**
  * Generated class for the MatchcenterPage page.
  *
@@ -25,15 +28,18 @@ import { LocalDataProvider } from './../../providers/local-data/local-data';
   selector: 'page-matchcenter',
   templateUrl: 'matchcenter.html',
   // pipes: [ReversePipe]
-  //  pipes: [KeysPipe]
+  //  pipes: [SafePipe]
 })
 export class MatchcenterPage {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   @ViewChild(Content) content: Content;
 
-
+  statusCounter:any = 0;
+  UpcomeCount:any = 0;
   Interval1:any;
   Interval2:any;
+
+  safeURL:any;
 
   AdShown: boolean = true;
 
@@ -63,6 +69,8 @@ export class MatchcenterPage {
 
   YearList: any = [];
 
+  weblink:boolean = false;
+
   Entered:boolean = false;
 
   selectd_yr: any = '';
@@ -76,6 +84,7 @@ export class MatchcenterPage {
     public prolist : ProductListProvider,
     private modalCtrl: ModalController,
     public events: Events,
+    private sanitizer: DomSanitizer,
     public cmnfun: CommomfunctionProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
@@ -132,11 +141,23 @@ export class MatchcenterPage {
     return url.substring(12);
   }
 
+
   load(status){
-   if(status == 'UPCOMING' || status == 'LIVE'){
-    // clearInterval(this.Interval1);
-    // clearInterval(this.Interval2);
-   }
+    // console.log(this.statusCounter);
+    // if(status == 'COMPLETE' || status == 'UPCOMING'){
+    //   this.statusCounter++;
+    //   this.UpcomeCount++;
+    //   if(this.statusCounter > 3 && this.UpcomeCount > 3){
+    //       clearInterval(this.Interval1);
+    //       clearInterval(this.Interval2);
+    //   }
+    // }else if(status == 'LIVE'){
+    //   this.statusCounter++;
+    // }
+    // if(this.statusCounter == 4){
+    //   console.log('hide');
+    //   this.cmnfun.HideLoading();
+    // }
   }
 
   trackByFn(index, item) {
@@ -150,6 +171,7 @@ export class MatchcenterPage {
   // }
   ionViewDidLoad() {
     this.Entered = true;
+  
   //  else{
       // this.cmnfun.HideLoading();
     // }
@@ -285,6 +307,8 @@ export class MatchcenterPage {
   }
 
   selectRound = function (roundNo, competitionNo) {
+    this.statusCounter = 0;
+    this.UpcomeCount = 0;
     console.log(roundNo);
     console.log(competitionNo);
     this.cmnfun.showLoading('Please wait...');
@@ -321,6 +345,14 @@ export class MatchcenterPage {
     let me = this;
     modal.onDidDismiss(data => {
       if(data){
+      if(data.seasons[0].manual_score_recording == "2"){
+        this.selectables = data.competitions_name;
+        this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_match_centre);
+        if(this.Interval1){clearInterval(this.Interval1)}
+        if(this.Interval2){clearInterval(this.Interval2)}
+        this.weblink = true;
+      } else { 
+      this.weblink = false;
       this.cmnfun.showLoading('Please wait...');
       console.log(data);
       this.selectables = data.competitions_name
@@ -350,6 +382,7 @@ export class MatchcenterPage {
       }, error => {
         // this.cmnfun.showToast('Some thing Unexpected happen please try again');
       })
+    }
     }
     });
     modal.present();
@@ -419,6 +452,8 @@ export class MatchcenterPage {
 
   // get matches by year function
   GetMatchesByYear(year, competitionid){
+    this.statusCounter = 0;
+    this.UpcomeCount = 0;
     if(this.Interval1){clearInterval(this.Interval1);}
     if(this.Interval2){clearInterval(this.Interval2);}
     this.roundNo = '';

@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content class="bgPage-color" no-bounce style="padding-top:15px;">
+<div *ngIf="!weblink">    
       <div class="yeardropdown" (click)="presentPopover($event)">
         <p class="seasontxt">SEASON</p>
         <p class="yrtxt">{{selectd_yr}}</p>
@@ -98,7 +99,11 @@
 
         </tbody>
     </table>
+</div>
     <!-- <div id="placeholder" style="width:600px;height:300px"></div>  -->
+    <div *ngIf="weblink" class="weblinkclass">
+            <iframe height="100%" width="100%" [src]="safeURL" seamless allowfullscreen></iframe>
+        </div>
 </ion-content>
 <ion-footer>
     <ion-toolbar class="jb-toolbar">
