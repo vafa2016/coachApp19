@@ -37,13 +37,13 @@ export class LadderPage {
   selectd_yr:any;
   YearList:any;
   weblink : boolean = false;
-  safeUrl : any;
+  safeURL : any;
   // path: any = 'http://vafalive.com.au';
   path1: any = 'http://54.244.98.247';
   path: any = 'https://s3.us-west-2.amazonaws.com/vafas3';
 
 
-  constructor(  private sanitizer: DomSanitizer,private inapp: InAppBrowser,public popoverCtrl: PopoverController,
+  constructor(private sanitizer: DomSanitizer,private inapp: InAppBrowser,public popoverCtrl: PopoverController,
     public plt:Platform,public ga:GoogleAnalytics, public ajax: AjaxProvider, public cmnfun: CommomfunctionProvider, private modalCtrl: ModalController, public events: Events, public navCtrl: NavController, public navParams: NavParams) {
 
     // $.plot($("#placeholder"), [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });

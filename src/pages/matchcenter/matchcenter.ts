@@ -171,7 +171,7 @@ export class MatchcenterPage {
   // }
   ionViewDidLoad() {
     this.Entered = true;
-  
+
   //  else{
       // this.cmnfun.HideLoading();
     // }
@@ -307,11 +307,12 @@ export class MatchcenterPage {
   }
 
   selectRound = function (roundNo, competitionNo) {
+    const loaderCount = 0;
     this.statusCounter = 0;
     this.UpcomeCount = 0;
     console.log(roundNo);
     console.log(competitionNo);
-    this.cmnfun.showLoading('Please wait...');
+    this.cmnfun.showLoader('Please wait...');
     this.roundNo = roundNo;
     this.competition_id = competitionNo;
 
@@ -326,6 +327,10 @@ export class MatchcenterPage {
       year :  this.selectd_yr,
       competition_id:  this.competition_id
     }).subscribe((res) => {
+      if(loaderCount===0){
+        this.cmnfun.hideLoader();
+        loaderCount++;
+      }
       if(res.message != 'round value is empty' || res.message != 'No Data Found'){
         this.getroundwise(res);
       }
@@ -351,7 +356,7 @@ export class MatchcenterPage {
         if(this.Interval1){clearInterval(this.Interval1)}
         if(this.Interval2){clearInterval(this.Interval2)}
         this.weblink = true;
-      } else { 
+      } else {
       this.weblink = false;
       this.cmnfun.showLoading('Please wait...');
       console.log(data);

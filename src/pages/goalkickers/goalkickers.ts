@@ -8,6 +8,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Searchbar } from 'ionic-angular';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { PopoverController } from 'ionic-angular';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 /**
  * Generated class for the GoalkickersPage page.
  *
@@ -29,8 +30,8 @@ export class GoalkickersPage {
   searchTerm: String = '';
   items: any = [];
   // path: any = 'http://vafalive.com.au';
-  path1: any = 'http://54.244.98.247';
-  // path: any = 'http://52.89.30.220';
+  // path1: any = 'http://54.244.98.247';
+  path1: any = 'http://52.89.30.220';
   path: any = 'https://s3.us-west-2.amazonaws.com/vafas3';
   competition_id: any;
   comptitionlists: any = [];
@@ -44,10 +45,14 @@ export class GoalkickersPage {
   headerAdv: any = [];
   footerAdv: any = [];
 
+  weblink: boolean = false;
+  safeURL: any;
+
   selectd_yr: any = '';
   constructor(private zone: NgZone,public plt:Platform,
     public ga:GoogleAnalytics, public keyboard: Keyboard,
      private inapp: InAppBrowser, public ajax: AjaxProvider,
+     private sanitizer: DomSanitizer,
       private modalCtrl: ModalController, public events: Events,
        public cmnfun: CommomfunctionProvider, public navCtrl: NavController,
        public popoverCtrl: PopoverController,  public navParams: NavParams) {
@@ -223,6 +228,12 @@ export class GoalkickersPage {
       let me = this;
       modal.onDidDismiss(data => {
          if(data){
+           if(data.seasons[0].manual_score_recording == "2"){
+            this.selectables = data.competitions_name;
+            this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_goal_kickers);
+            this.weblink = true;
+           }else {
+            this.weblink = false;
         console.log(data);
         this.competition_id = data.seasons[0].competition_id;
         this.YearList = data.seasons;
@@ -241,6 +252,7 @@ export class GoalkickersPage {
         }, error => {
           // this.cmnfun.showToast('Some thing Unexpected happen please try again');
         })
+      }
       }
       });
       modal.present();

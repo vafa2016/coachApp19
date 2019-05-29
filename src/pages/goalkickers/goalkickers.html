@@ -18,7 +18,7 @@
       (ionInput)="triggerInput($event)" [ngModelOptions]="{standalone: true}" name="search"></ion-searchbar>
     <!-- Search Icon -->
     </form>
-    <ion-buttons end *ngIf="!toggled">
+    <ion-buttons end *ngIf="!toggled && !weblink">
       <button ion-button icon-only (click)="toggleSearch()"><ion-icon name="search"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
@@ -78,10 +78,15 @@
     </div>
   </div>
   <!-- weblink -->
-  <div *ngIf="weblink">
       <div *ngIf="weblink" class="weblinkclass">
          <iframe height="100%" width="100%" [src]="safeURL" seamless allowfullscreen></iframe>
       </div>
-  </div>
   <!--  -->
 </ion-content>
+<ion-footer *ngIf="weblink" >
+  <ion-toolbar class="jb-toolbar">
+      <div class="jb-adv">
+          <img src="assets/imgs/CSM_-_More_Footy_Less_Admin_(white).gif" class="full-image">
+      </div>
+  </ion-toolbar>
+</ion-footer>

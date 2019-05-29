@@ -15,6 +15,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CommomfunctionProvider {
   loading: any;
+  custmLoading: any;
   userdetails: any;
   ImgRes:any;
 
@@ -64,6 +65,17 @@ export class CommomfunctionProvider {
   }
 
 
+
+  loadjd(msg) {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: msg,
+      cssClass: 'loading-class-my'
+      });
+    this.loading.present();
+  }
+
+
   showLoading(msg) {
     this.loading = this.loadingCtrl.create({
       spinner: 'hide',
@@ -108,6 +120,19 @@ export class CommomfunctionProvider {
 
   HideLoad() {
     this.loading.dismiss();
+  }
+
+  showLoader(msg) {
+    this.custmLoading = this.loadingCtrl.create({
+      spinner: 'hide',
+      cssClass: 'my-loading-class',
+      // content: msg
+    });
+    this.custmLoading.present();
+  }
+
+  hideLoader(){
+    this.custmLoading.dismiss();
   }
 
   UploadImgServer(url){

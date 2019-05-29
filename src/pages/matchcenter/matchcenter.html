@@ -132,4 +132,8 @@
   <div *ngIf="weblink" class="weblinkclass">
       <iframe height="100%" width="100%" [src]="safeURL" seamless allowfullscreen></iframe>
   </div>
+  <div  class="advContainer"  *ngIf="weblink" style="margin: 0 auto 0 -7px; width: 104%;">
+    <img src="{{path}}{{cutPath(totalRoundsData[0].ad_image)}}" (click)="goToAddSite(totalRoundsData[0].ad_url);">
+  </div>
 </ion-content>
+
