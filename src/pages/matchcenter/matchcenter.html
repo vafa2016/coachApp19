@@ -130,10 +130,13 @@
     </div>
   </div>
   <div *ngIf="weblink" class="weblinkclass">
-      <iframe height="100%" width="100%" [src]="safeURL" seamless allowfullscreen></iframe>
-  </div>
-  <div  class="advContainer"  *ngIf="weblink" style="margin: 0 auto 0 -7px; width: 104%;">
-    <img src="{{path}}{{cutPath(totalRoundsData[0].ad_image)}}" (click)="goToAddSite(totalRoundsData[0].ad_url);">
+      <iframe [src]="safeURL" seamless allowfullscreen sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation"></iframe>
   </div>
 </ion-content>
-
+<ion-footer *ngIf="weblink" >
+  <ion-toolbar class="jb-toolbar">
+      <div class="jb-adv">
+          <img src="assets/imgs/CSM_-_More_Footy_Less_Admin_(white).gif" class="full-image">
+      </div>
+  </ion-toolbar>
+</ion-footer>

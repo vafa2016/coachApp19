@@ -61,6 +61,7 @@ export class FixturePage {
   selectd_yr: any = '';
   safeURL : any;
   weblink:boolean = false;
+  WeblinkAd: any;
 
   constructor(private zone: NgZone,
     public plt:Platform,
@@ -73,7 +74,6 @@ export class FixturePage {
     public events: Events,
     public cmnfun: CommomfunctionProvider,
     public navCtrl: NavController, public navParams: NavParams) {
-
      this.plt.ready().then(() => {
       this.ga.startTrackerWithId('UA-118996199-1')
       .then(() => {
@@ -216,7 +216,8 @@ export class FixturePage {
 
     })
 
-
+// weblink add fetching api
+// this.ajax.postMethod
 
   }
   getroundcompetitionfixture(res) {

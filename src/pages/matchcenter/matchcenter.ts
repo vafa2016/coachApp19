@@ -456,7 +456,7 @@ export class MatchcenterPage {
 
 
   // get matches by year function
-  GetMatchesByYear(year, competitionid){
+  GetMatchesByYear(year, competitionid) {
     this.statusCounter = 0;
     this.UpcomeCount = 0;
     if(this.Interval1){clearInterval(this.Interval1);}
