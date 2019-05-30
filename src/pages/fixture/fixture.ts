@@ -219,6 +219,7 @@ export class FixturePage {
 // weblink add fetching api
   this.ajax.postMethod('get-weblink-advertisements',{ page_title : 'Fixture(Weblink)'}).subscribe((res : any) =>{
     this.WeblinkAd = res.footerAdv.ad_image;
+    console.log(this.WeblinkAd);
   })
   }
   getroundcompetitionfixture(res) {

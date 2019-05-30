@@ -108,7 +108,8 @@
 <ion-footer>
     <ion-toolbar class="jb-toolbar">
         <div class="jb-adv">
-            <img src="assets/imgs/CSM_-_More_Footy_Less_Admin_(white).gif" class="full-image">
-        </div>
+          <img *ngIf="WeblinkAd == undefined" class="full-image" src="assets/imgs/CSM_-_More_Footy_Less_Admin_(white).gif">
+          <img *ngIf="WeblinkAd != undefined" [src]="WeblinkAd">
+      </div>
     </ion-toolbar>
 </ion-footer>

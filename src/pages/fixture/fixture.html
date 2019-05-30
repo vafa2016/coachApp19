@@ -144,13 +144,14 @@
 	</div>
 	<!-- weblink -->
 	<div *ngIf="weblink" class="weblinkclass">
-      <iframe  [src]="safeURL" seamless allowfullscreen sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation"></iframe>
+      <iframe  [src]="safeURL" seamless ></iframe>
   </div>
 </ion-content>
 <ion-footer *ngIf="weblink" >
   <ion-toolbar class="jb-toolbar">
       <div class="jb-adv">
-          <img src="assets/imgs/CSM_-_More_Footy_Less_Admin_(white).gif">
+          <img *ngIf="WeblinkAd == undefined" src="assets/imgs/CSM_-_More_Footy_Less_Admin_(white).gif">
+          <img *ngIf="WeblinkAd != undefined" [src]="WeblinkAd">
       </div>
   </ion-toolbar>
 </ion-footer>
