@@ -143,8 +143,8 @@
 		</div>
 	</div>
 	<!-- weblink -->
-	<div *ngIf="weblink" class="weblinkclass">
-      <iframe  [src]="safeURL" seamless ></iframe>
+	<div *ngIf="weblink" class="weblinkclass" [innerHtml]='safeURL'>
+      <!-- <iframe height="100%" width="100%" [src]="safeURL" seamless ></iframe> -->
   </div>
 </ion-content>
 <ion-footer *ngIf="weblink" >

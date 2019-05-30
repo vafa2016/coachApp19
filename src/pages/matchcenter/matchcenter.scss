@@ -8,18 +8,17 @@ page-matchcenter {
     bottom: 52px !important;
 }
 
-  .weblinkclass{
-    -webkit-overflow-scrolling: touch !important;
-    overflow: scroll !important;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .iframe {
-    overflow: scroll !important;
-    width: 500px;
-    height: 500px;
-    border: none;
+.weblinkclass{
+  -webkit-overflow-scrolling: touch !important;
+  overflow: scroll !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+}
+.weblinkclass iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
      ion-header .toolbar
         {

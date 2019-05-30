@@ -78,8 +78,8 @@
     </div>
   </div>
   <!-- weblink -->
-      <div *ngIf="weblink" class="weblinkclass">
-         <iframe height="100%" width="100%" [src]="safeURL" seamless allowfullscreen></iframe>
+      <div *ngIf="weblink" class="weblinkclass" [innerHTML]="safeURL">
+         <!-- <iframe height="100%" width="100%" [src]="safeURL" seamless allowfullscreen></iframe> -->
       </div>
   <!--  -->
 </ion-content>

@@ -199,7 +199,9 @@ presentPopover(myEvent) {
       if(data){
         if(data.seasons[0].manual_score_recording == "2"){
           this.selectables = data.competitions_name;
-          this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_fixture);
+          var htmlvalue = '<iframe src='+data.seasons[0].weblink_ladder+' seamless   sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation"></iframe>';
+          this.safeURL =this.sanitizer.bypassSecurityTrustHtml(htmlvalue);
+          // this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_ladder);
           this.weblink = true;
         }else{
           this.weblink = false;

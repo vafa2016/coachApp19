@@ -30,8 +30,8 @@ export class GoalkickersPage {
   searchTerm: String = '';
   items: any = [];
   // path: any = 'http://vafalive.com.au';
-  // path1: any = 'http://54.244.98.247';
-  path1: any = 'http://52.89.30.220';
+  path1: any = 'http://54.244.98.247';
+  // path1: any = 'http://52.89.30.220';
   path: any = 'https://s3.us-west-2.amazonaws.com/vafas3';
   competition_id: any;
   comptitionlists: any = [];
@@ -236,7 +236,9 @@ export class GoalkickersPage {
          if(data){
            if(data.seasons[0].manual_score_recording == "2"){
             this.selectables = data.competitions_name;
-            this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_goal_kickers);
+            var htmlvalue = '<iframe src='+data.seasons[0].weblink_goal_kickers+' seamless   sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation"></iframe>';
+            this.safeURL =this.sanitizer.bypassSecurityTrustHtml(htmlvalue);
+            // this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_goal_kickers);
             this.weblink = true;
            }else {
             this.weblink = false;
