@@ -357,7 +357,7 @@ export class MatchcenterPage {
       if(data){
       if(data.seasons[0].manual_score_recording == "2"){
         this.selectables = data.competitions_name;
-        var htmlvalue = '<iframe src='+data.seasons[0].weblink_match_centre+' seamless   sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation"></iframe>';
+        var htmlvalue = '<iframe src='+data.seasons[0].weblink_match_centre+' seamless   sandbox="allow-forms allow-scripts"></iframe>';
         this.safeURL =this.sanitizer.bypassSecurityTrustHtml(htmlvalue);
         if(this.Interval1){clearInterval(this.Interval1)}
         if(this.Interval2){clearInterval(this.Interval2)}
@@ -372,14 +372,17 @@ export class MatchcenterPage {
       this.YearList =data.seasons;
       this.selectd_yr = this.YearList[0].competition_year;
       //
-      // this.roundNo = '';
+      this.roundNo = '';
       if(this.Interval1){clearInterval(this.Interval1)}
       if(this.Interval2){clearInterval(this.Interval2)}
       this.ajax.datalist('get-competition-wise-match-score-by-year', {
         accessKey: 'QzEnDyPAHT12asHb4On6HH2016',
         competition_id: data.seasons[0].competition_id,
         year : this.selectd_yr
-      }).subscribe((res) => {
+      }).subscribe((res:any) => {
+        setTimeout(() => {
+          this.scrolround(res.current_round);
+        }, 100);
         this.getroundwise(res);
         if(this.Interval1){clearInterval(this.Interval1)}
         if(this.Interval2){clearInterval(this.Interval2)}
