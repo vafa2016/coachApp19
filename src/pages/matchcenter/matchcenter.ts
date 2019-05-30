@@ -72,7 +72,7 @@ export class MatchcenterPage {
   weblink:boolean = false;
 
   Entered:boolean = false;
-
+  WeblinkAd:any;
   selectd_yr: any = '';
   constructor(private inapp: InAppBrowser,
     public plt:Platform,
@@ -227,6 +227,11 @@ export class MatchcenterPage {
       }
 
     })
+
+    // weblink add fetching api
+  this.ajax.postMethod('get-weblink-advertisements',{ page_title : 'Match Centre(Weblink)'}).subscribe((res : any) =>{
+    this.WeblinkAd = res.footerAdv.ad_image;
+  })
   }
   getroundwise(res) {
     console.log(res);

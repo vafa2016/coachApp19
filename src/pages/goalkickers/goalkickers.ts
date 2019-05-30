@@ -44,6 +44,7 @@ export class GoalkickersPage {
   YearList : any = [];
   headerAdv: any = [];
   footerAdv: any = [];
+  WeblinkAd:any;
 
   weblink: boolean = false;
   safeURL: any;
@@ -192,6 +193,11 @@ export class GoalkickersPage {
     }, error => {
       // this.cmnfun.showToast('Some thing Unexpected happen please try again');
     })
+
+    // weblink add fetching api
+  this.ajax.postMethod('get-weblink-advertisements',{ page_title : 'Goal Kickers(Weblink)'}).subscribe((res : any) =>{
+    this.WeblinkAd = res.footerAdv.ad_image;
+  })
   }
   onScroll() {
     //   this.content.ionScrollEnd.subscribe((data)=>{

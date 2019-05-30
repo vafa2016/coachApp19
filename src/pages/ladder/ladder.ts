@@ -28,6 +28,7 @@ export class LadderPage {
   comptitionlists: any = [];
   competition_id: any;
   selectables: any = [];
+  WeblinkAd:any;
   arraySize: any;
   advertisementHeader: any;
   advertisementFooter: any;
@@ -93,6 +94,12 @@ export class LadderPage {
         })
       }
     });
+
+
+        // weblink add fetching api
+  this.ajax.postMethod('get-weblink-advertisements',{ page_title : 'Ladder(Weblink)'}).subscribe((res : any) =>{
+    this.WeblinkAd = res.footerAdv.ad_image;
+  })
 
   }
 // year_dropdown
