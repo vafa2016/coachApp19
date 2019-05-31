@@ -357,7 +357,7 @@ export class MatchcenterPage {
       if(data){
       if(data.seasons[0].manual_score_recording == "2"){
         this.selectables = data.competitions_name;
-        var htmlvalue = '<iframe src='+data.seasons[0].weblink_match_centre+' seamless   sandbox="allow-forms allow-scripts"></iframe>';
+        var htmlvalue = '<iframe src='+data.seasons[0].weblink_match_centre+' sandbox="allow-pointer-lock allow-popups allow-same-origin allow-forms allow-scripts"></iframe>';
         this.safeURL =this.sanitizer.bypassSecurityTrustHtml(htmlvalue);
         if(this.Interval1){clearInterval(this.Interval1)}
         if(this.Interval2){clearInterval(this.Interval2)}

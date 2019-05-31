@@ -500,7 +500,7 @@ export class FixturePage {
       console.log(data);
       if(data.seasons[0].manual_score_recording == "2"){
         this.selectables = data.competitions_name;
-        var htmlvalue = '<iframe src='+data.seasons[0].weblink_fixture+' seamless   sandbox="allow-forms allow-scripts"></iframe>';
+        var htmlvalue = '<iframe src='+data.seasons[0].weblink_fixture+' seamless   sandbox="allow-popups allow-same-origin allow-forms allow-scripts"></iframe>';
         this.safeURL =this.sanitizer.bypassSecurityTrustHtml(htmlvalue);
         // this.safeURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.seasons[0].weblink_fixture);
         this.weblink = true;

@@ -58,7 +58,8 @@ export class HomePage {
     // alert('');
     this.cmnfun.showLoading('Please wait...');
     this.ajax.postMethod('get-all-news-v1', {
-      accessKey: 'QzEnDyPAHT12asHb4On6HH2016'
+      accessKey: 'QzEnDyPAHT12asHb4On6HH2016',
+      page : this.index
     }).subscribe((res) => {
       this.cmnfun.HideLoading();
 
